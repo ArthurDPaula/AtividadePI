@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GraphCar</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/cadastroMotorista.css">
+
+    <link href="/assets/img/favicon.png" rel="icon">
+    <link href="/assets/img/favicon.png" rel="apple-touch-icon">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.js"></script>
+    
+</head>
+<body>
+
+    <header>
+      <a href="index.html"><img src="assets/img/graph.png" class="img_header" alt="Logo_GraphCar" srcset="" width="300px"></a>
+      </header>
+
+    <div class="login-box">
+        <h2>Cadastro de Motorista</h2>
+        <form>
+          <div class="user-box">
+            <input type="text" name="" required="" id="ipt_nome">
+            <label>Nome</label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="" required="" id="ipt_cpf">
+            <label>CPF</label>
+          </div>
+          <div class="user-box">
+            <select name="modelo" id="ipt_modelo">
+                <option value="default" disabled selected>Selecione um Modelo</option>
+            </select>
+          </div>
+          <div class="user-box">
+            <input type="text" name="" maxlength="8" required="" id="ipt_placa">
+            <label>Placa</label>
+          </div>
+          <div class="user-box">
+            <input type="email" name="" required="" id="ipt_email">
+            <label>Email</label>
+          </div>
+          <div class="user-box">
+            <input type="password" name="" required="" id="ipt_senha">
+            <label>Senha</label>
+          </div>
+          <div class="user-box">
+            <input type="password" name="" required="" id="ipt_confirmarSenha">
+            <label>Confirmar Senha</label>
+          </div>
+          <a onclick="cadastrar()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Cadastrar
+        </form>
+      </div>
+      <div class="msg-cadastro">
+        <p class="p-msg-cadastro">Já tem uma conta?</p> <a href="login.html" class="a-msg-cadastro"> Clique Aqui!</a>
+       </div>
+
+
+</body>
+</html>
+<script src="assets/js/cadastroMotorista.js"></script>
+
+<script>
+  $('#ipt_cpf').mask('000.000.000-00');
+
+  modelos()
+</script>

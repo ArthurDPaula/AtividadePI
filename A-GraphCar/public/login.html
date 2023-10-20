@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GraphCar</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <link href="./assets/img/favicon.png" rel="icon">
+    <link href="assets/img/favicon.png" rel="apple-touch-icon">
+
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html"><img src="assets/img/graph.png" class="img_header" alt="Logo_GraphCar" srcset=""
+                width="300px"></a>
+    </header>
+
+    <div class="login-box">
+        <h2>Login</h2>
+        <form>
+            <div class="user-box">
+                <input type="email" name="" required="" id="ipt_email_usuario">
+                <label>E-mail</label>
+            </div>
+            <div class="user-box">
+                <input type="password" name="" required="" id="ipt_senha_usuario">
+                <label>Senha</label>
+            </div>
+            <a href="#" onclick="login()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Entrar
+        </form>
+      </div>
+      <div class="msg-cadastro">
+       <p class="p-msg-cadastro">Não tem um plano?</p> <a href="index.html#pricing" class="a-msg-cadastro"> Clique Aqui!</a>
+      </div>
+
+</body>
+
+</html>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap');
+</style>
+
+<script>
+    var idUsuario = localStorage.ID_USUARIO;
+    var idModelo = localStorage.ID_MODELO;
+    var redirecionamento = localStorage.REDIRECIONAMENTO;
+
+    // if (idModelo != undefined && idUsuario != undefined) {
+
+    //     window.location = "cadastroMotorista.html";
+
+    // } else {
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3500",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+
+        function login() {
+            var email = ipt_email_usuario.value;
+            var senha = ipt_senha_usuario.value;
+            var verificacao = true;
+
+            if (email.length == 0) {
+                toastr.error("<b style='font-family: arial;'> Insira um email</b>")
+                verificacao = false;
+
+            } else if (email.startsWith("@")) {
+                toastr.error("<b style='font-family: arial;'> Insira um email válido</b>")
+                verificacao = false;
+            }
+
+            if (senha.length == 0) {
+                toastr.error("<b style='font-family: arial;'> Insira uma senha</b>")
+                verificacao = false;
+            }
+
+            if (verificacao) {
+
+                console.log('Realizando o fetch("/Usuarios/autenticar") no login.html');
+
+                fetch("/Usuarios/autenticar", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        emailServer: email,
+                        senhaServer: senha,
+                    })
+
+                }).then(function (resposta) {
+
+                    if (resposta.ok) {
+
+                        console.log('Fetch realizado com sucesso! Resposta: \n' + resposta);
+
+                        resposta.json().then(json => {
+                            console.log(json);
+                            
+                            localStorage.ID_MODELO = json.idModelo;
+                            localStorage.ID_USUARIO = json.idUsuario;
+                            localStorage.REDIRECIONAMENTO = json.Redirecionamento;
+
+                            // localStorage.EMAIL_USUARIO = json.emailUsuario;
+                            // localStorage.SENHA_USUARIO = json.senhaServer;
+                            
+                            window.location=json.Redirecionamento;
+
+                        });
+
+                    } else {
+                        console.log(resposta)
+                        console.log("Houve um erro ao tentar realizar o login!");
+
+                        resposta.text().then(texto => {
+                            console.error(texto);
+                            alert("Houve um erro ao tentar realizar o login!");
+                        });
+                    }
+
+                }).catch(function (erro) {
+                    console.log(erro);
+                })
+
+            } else {
+                setTimeout(() => {
+                    error_box.style.display = "none";
+                }, 5000);
+            }
+
+        }
+    // }
+
+</script>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GraphCar</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/loader.css">
+    <link rel="stylesheet" href="assets/css/perfi.css">
+
+    <link href="./assets/img/favicon.png" rel="icon">
+    <link href="assets/img/favicon.png" rel="apple-touch-icon">
+
+</head>
+
+<body>
+
+    <div class="main">
+        <div class="controle" id="controle">
+            <div class="usuario">
+                <button id="hamburguer" onclick="mostrarControle()"><img src="assets/img/Hamburger_icon.png"></button>
+                <img src="" class="foto" id="usuarioFoto">
+                <h2 id="nomeUsuario"></h2>
+            </div>
+            <div class="interacao" id="interacao">
+                <button class="botao" onclick="dadosCadastro(idUsuario)">Dados de cadastro</button>
+                <button class="botao" onclick="exibirCarro(idUsuario)">Dados do carro</button>
+                <!-- <button class="botao" onclick="exibirConfgCarro(idModelo)">Configurações do carro</button> -->
+                <button class="botao" onclick="personalizar()">Personalizar</button>
+                <button class="botao" onclick="inicio()">Início</button>
+                <button class="sair" onclick="sair()">Sing-up</button>
+            </div>
+        </div>
+        <div class="dados" id="dadosGerais">
+            <div id="dCadastro">
+
+                <div class="linha">
+                    <h1>Nome</h1>
+                    <p id="nomeCadastro"></p>
+                </div>
+                <div class="linha">
+                    <h1>Email</h1>
+                    <p id="emailCadastro"></p>
+                </div>
+                <div class="linha">
+                    <h1>CPF</h1>
+                    <p id="CPFCadastro"></p>
+                </div>
+                <div class="linha">
+                    <h1>Plano</h1>
+                    <p id="planoCadastro"></p>
+                </div>
+
+            </div>
+
+            <div id="dCarro">
+
+                <div class="linha">
+                    <h1>Placa</h1>
+                    <p id="placaCarro"></p>
+                </div>
+                <div class="linha">
+                    <h1>Modelo</h1>
+                    <p id="modeloCarro"></p>
+                </div>
+
+            </div>
+
+            <div id="dPersonalizar" style="display:none;">
+
+                <div class="linha">
+                    <h1>Alterar foto</h1>
+                    <input type="file" id="foto" accept="image/*" />
+                    <button onclick="mudarFoto(idUsuario)">Alterar</button>
+                </div>
+                <div class="linha">
+                    <h1>Alterar nome</h1>
+                    <input type="text" id="nome">
+                    <button onclick="mudarNome(idUsuario)">Alterar</button>
+                </div>
+
+            </div>
+
+            <!-- <div id="confgCarro">
+
+                <div class="linha">
+                    <h1>Processador</h1>
+                    <p id="CPU"></p>
+                </div>
+                <div class="linha">
+                    <h1>Placa de vídeo</h1>
+                    <p id="GPU"></p>
+                </div>
+                <div class="linha">
+                    <h1>Memória</h1>
+                    <p id="memoria"></p>
+                </div>
+                <div class="linha">
+                    <h1>Armazenamento</h1>
+                    <p id="HD"></p>
+                </div>
+
+            </div> -->
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="assets/js/perfil.js"></script>
+
+<script>
+    var idUsuario = localStorage.ID_USUARIO;
+    var idModelo = localStorage.ID_MODELO;
+
+    if (idUsuario == undefined || idModelo == undefined) {
+
+        window.location = "login.html";
+
+    } else {
+
+        carregarPagina(idUsuario)
+    }
+
+</script>
