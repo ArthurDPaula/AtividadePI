@@ -11,11 +11,20 @@ router.get("/alertasGerais", function (req, res) {
     dadosController.alertasGerais(req, res);
 });
 
+router.get("/listarNotificacoes", function (req, res) {
+    dadosController.listarNotificacoes(req, res);
+});
+
 router.get("/alertasUltimoMes", function (req, res) {
     dadosController.alertasUltimoMes(req, res);
 });
-router.get("/alertasNotificacoes", function (req, res){
-    dadosController.alertasNotificacoes(req, res);
-})
+
+router.get("/alertasConcatenados", function (req, res) {
+    dadosController.alertasConcatenados(req, res);
+});
+
+router.get("/metasDashboard", function(req, res) {
+    dadosController.metasDashboard(req, res);
+});
 
 module.exports = router;
